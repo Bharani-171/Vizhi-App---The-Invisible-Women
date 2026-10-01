@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>விழி</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800&display=swap" rel="stylesheet">
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f6f8;
+  text-align: center;
+  margin-top: 40px;
+}
+
+.logo {
+  width: 90px;
+  margin-bottom: 10px;
+}
+
+h1 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 800;
+  font-size: 34px;
+  color: #2c3e50;
+  margin-bottom: 5px;
+}
+
+.subtitle {
+  color: #555;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.container {
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 12px;
+  width: 360px;
+  margin: auto;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.input-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.mic-btn {
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  background: #2c3e50;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.ask-btn {
+  margin-top: 12px;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 6px;
+  background: #2c3e50;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  width: 100%;
+}
+
+#status {
+  margin-top: 10px;
+  font-size: 13px;
+  color: #777;
+}
+
+#output {
+  margin-top: 18px;
+  padding: 14px;
+  background: #f1f1f1;
+  border-radius: 6px;
+  font-size: 14px;
+  text-align: left;
+  min-height: 70px;
+  line-height: 1.5;
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🔥 LOGO -->
+<img src="logo.png" class="logo">
+
+<h1>விழி</h1>
+<p class="subtitle">தமிழில் எளிய அரசு உதவி</p>
+
+<div class="container">
+
+<div class="input-box">
+  <input type="text" id="textInput" placeholder="உங்கள் தேவையை இங்கே தட்டச்சிக்கவும்">
+  <button class="mic-btn" onclick="startMic()">🎤</button>
+</div>
+
+<button class="ask-btn" onclick="fakeAI()">கேள்</button>
+
+<p id="status"></p>
+
+<div id="output">உங்கள் கேள்விக்கு பதில் இங்கே காட்டப்படும்</div>
+
+</div>
+
+<script>
+function startMic() {
+  const status = document.getElementById("status");
+
+  if (!('webkitSpeechRecognition' in window)) {
+    status.innerText = "Chrome browser பயன்படுத்தவும்";
+    return;
+  }
+
+  const recognition = new webkitSpeechRecognition();
+  recognition.lang = "ta-IN";
+
+  recognition.start();
+  status.innerText = "கேட்கிறது...";
+
+  recognition.onresult = function(event) {
+    document.getElementById("textInput").value =
+      event.results[0][0].transcript;
+    status.innerText = "முடிந்தது";
+  };
+}
+
+function fakeAI() {
+  const output = document.getElementById("output");
+  output.innerText = "செயலாக்கப்படுகிறது...";
+
+  setTimeout(() => {
+    output.innerText =
+    "நீங்கள் விதவை பென்ஷன் திட்டத்திற்கு விண்ணப்பிக்கலாம்.\n\n1. ஆதார் கார்டு தயாராக வைத்துக்கொள்ளுங்கள்\n2. அருகிலுள்ள e-sevai மையத்திற்கு செல்லுங்கள்\n3. விண்ணப்பத்தை நிரப்புங்கள்\n4. ஒப்புதல் கிடைக்கும்";
+  }, 1500);
+}
+</script>
+
+</body>
+</html> 
